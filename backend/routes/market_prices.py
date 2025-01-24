@@ -3,11 +3,10 @@ import pandas as pd
 
 market_prices_bp = Blueprint('market_prices', __name__)
 
-# Example route for market price prediction
+
 @market_prices_bp.route('/get_crop_price', methods=['POST'])
 def get_crop_price():
     try:
-        # Get input data
         data = request.json
         state = data.get('state')
         crop_name = data.get('crop_name')
@@ -15,7 +14,6 @@ def get_crop_price():
         if not state or not crop_name:
             return jsonify({'error': 'State and crop_name are required fields'}), 400
 
-        # Load CSV file with crop prices
         df = pd.read_csv('datasets/market_prices.csv')
 
         # Filter data based on state and crop name
