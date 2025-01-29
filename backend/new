@@ -1,1 +1,7 @@
-pip install flask flask-cors pymongo requests scikit-learn joblib
+flask
+flask-cors
+pymongo
+requests
+scikit-learn
+joblib
+pandas
