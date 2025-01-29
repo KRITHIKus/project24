@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { predictCrop } from "../services/cropPrediction";
+import { predictCrop } from "../services/cropPrediction";  // Correct import
 
 const CropRecommendation = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +14,16 @@ const CropRecommendation = () => {
 
   const [prediction, setPrediction] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+
+  // Map of crops to their images
+  const cropImages: Record<string, string> = {
+    rice: "/assets/crop_images/rice.jpg",
+    corn: "/assets/crop_images/corn.jpg",
+    orange: "/assets/crop_images/orange.jpg",
+    banana: "/assets/crop_images/banana.jpg",
+    mungbean : "/assets/crop_images/mung bean.jpg",
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: parseFloat(e.target.value) });
@@ -23,10 +33,12 @@ const CropRecommendation = () => {
     e.preventDefault();
     setPrediction(null);
     setError(null);
+    setImageSrc(null);
 
     const result = await predictCrop(formData);
     if (result.predicted_crop) {
       setPrediction(result.predicted_crop);
+      setImageSrc(cropImages[result.predicted_crop.toLowerCase()] || null);
     } else {
       setError(result.error || "Unexpected error occurred.");
     }
@@ -53,7 +65,14 @@ const CropRecommendation = () => {
           Predict Crop
         </button>
       </form>
-      {prediction && <p className="mt-4 text-green-600 font-bold">Recommended Crop: {prediction}</p>}
+
+      {prediction && (
+        <div className="mt-4">
+          <p className="text-green-600 font-bold">Recommended Crop: {prediction}</p>
+          {imageSrc && <img src={imageSrc} alt={prediction} className="w-48 h-48 object-cover mt-2" />}
+        </div>
+      )}
+
       {error && <p className="mt-4 text-red-600">{error}</p>}
     </div>
   );

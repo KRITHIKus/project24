@@ -1,26 +1,4 @@
-// import api from "./app"; // Import the configured axios instance
-
-// interface CropData {
-//   N: number;
-//   P: number;
-//   K: number;
-//   ph: number;
-//   temperature: number;
-//   humidity: number;
-//   rainfall: number;
-// }
-
-// export const predictCrop = async (data: CropData) => {
-//   try {
-//     const response = await api.post("/predict", data);
-//     return response.data; // Expected: { predicted_crop: "Wheat" }
-//   } catch (error) {
-//     console.error("Error predicting crop:", error);
-//     return { error: "Failed to predict crop" };
-//   }
-// };
-
-import api from "./api";  // Import the configured axios instance
+import axios from "axios";
 
 interface CropData {
   N: number;
@@ -32,14 +10,24 @@ interface CropData {
   rainfall: number;
 }
 
+// Set backend URL directly here
+const API_BASE_URL = "http://127.0.0.1:5000"; // Backend API URL
+
 export const predictCrop = async (data: CropData) => {
   try {
     console.log("Sending data to backend:", data); // Log the request data
-    const response = await api.post("/predict", data); // API request to the backend
+    
+    // Sending the POST request to the backend
+    const response = await axios.post(`${API_BASE_URL}/predict`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
     console.log("Response from backend:", response.data); // Log the response data
     return response.data; // Expected: { predicted_crop: "Wheat" }
-  } catch (error) {
-    console.error("Error predicting crop:", error);  // Log any error
-    return { error: "Failed to predict crop" };
+  } catch (error: any) {
+    console.error("Error predicting crop:", error); // Log any error
+    return { error: "Failed to predict crop. Please check the backend connection." };
   }
 };
