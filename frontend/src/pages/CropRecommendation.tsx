@@ -25,7 +25,7 @@ const CropRecommendation = () => {
     grapes: "/assets/crop_images/grapes.jpg", 
     cotton: "/assets/crop_images/cotton.jpg", 
     jute: "/assets/crop_images/jute.jpg", 
-    kidneyBeans: "/assets/crop_images/kidney Beans.jpg", 
+    kidneybeans: "/assets/crop_images/kidney Beans.jpg", 
     lentil: "/assets/crop_images/lentil.jpg", 
     mango: "/assets/crop_images/mango.jpg", 
     pigeonpeas: "/assets/crop_images/pigeon peas.jpg", 

@@ -1,0 +1,17 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment
+venv/
+
+# Ignore environment variables file
+.env
+
+# Ignore model files (if stored locally and not part of the repo)
+models/
+
+# Ignore log files
+*.log
+
+
