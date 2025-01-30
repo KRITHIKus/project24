@@ -18,11 +18,29 @@ const CropRecommendation = () => {
 
   // Map of crops to their images (normalized keys)
   const cropImages: Record<string, string> = {
-    rice: "/assets/crop_images/rice.jpg",
-    corn: "/assets/crop_images/corn.jpg",
+    ricecrop: "/assets/crop_images/rice crop.jpg",
     orange: "/assets/crop_images/orange.jpg",
     banana: "/assets/crop_images/banana.jpg",
-    mungbean: "/assets/crop_images/mungbean.jpg", // Fixed key format
+    mungbean: "/assets/crop_images/mung bean.jpg", 
+    grapes: "/assets/crop_images/grapes.jpg", 
+    cotton: "/assets/crop_images/cotton.jpg", 
+    jute: "/assets/crop_images/jute.jpg", 
+    kidneyBeans: "/assets/crop_images/kidney Beans.jpg", 
+    lentil: "/assets/crop_images/lentil.jpg", 
+    mango: "/assets/crop_images/mango.jpg", 
+    pigeonpeas: "/assets/crop_images/pigeon peas.jpg", 
+    Pomegranate: "/assets/crop_images/Pomegranate.jpg", 
+    watermelon: "/assets/crop_images/watermelon.jpg", 
+    papaya: "/assets/crop_images/papaya.jpg", 
+    mothbeans: "/assets/crop_images/mothbeans.jpg", 
+    blackgram: "/assets/crop_images/blackgram.jpg",    
+    chickpea: "/assets/crop_images/chickpea.jpg",    
+    coconut: "/assets/crop_images/coconut.jpg",    
+    maize: "/assets/crop_images/maize.jpg",    
+    apple: "/assets/crop_images/apple.jpg",    
+    muskmelon: "/assets/crop_images/muskmelon.jpg",    
+    coffee: "/assets/crop_images/coffee.jpg",    
+
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
