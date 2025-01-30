@@ -1,10 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask
 from flask_cors import CORS
+from routes.market_prices import market_prices_bp  # Import your market price routes
 import joblib
 import pandas as pd
+from flask import Flask, request, jsonify  #
 
 app = Flask(__name__)
-CORS(app, resources={r"/predict": {"origins": "http://localhost:5173"}})
+CORS(app)## resources={r"/*": {"origins": "http://localhost:5173"}})  # Enable CORS for all endpoints
 
 # Load the pre-trained crop prediction model
 model = joblib.load('models/crop_model.pkl')
@@ -42,5 +44,8 @@ def predict_crop():
         print("Error during prediction:", e)  # Log the error for debugging
         return jsonify({'error': str(e)}), 400
 
+# Register market price prediction blueprint
+app.register_blueprint(market_prices_bp)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)  # Allow access on network

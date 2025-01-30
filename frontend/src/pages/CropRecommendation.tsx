@@ -16,17 +16,21 @@ const CropRecommendation = () => {
   const [error, setError] = useState<string | null>(null);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
 
-  // Map of crops to their images
+  // Map of crops to their images (normalized keys)
   const cropImages: Record<string, string> = {
     rice: "/assets/crop_images/rice.jpg",
     corn: "/assets/crop_images/corn.jpg",
     orange: "/assets/crop_images/orange.jpg",
     banana: "/assets/crop_images/banana.jpg",
-    mungbean : "/assets/crop_images/mung bean.jpg",
+    mungbean: "/assets/crop_images/mungbean.jpg", // Fixed key format
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: parseFloat(e.target.value) });
+    const { name, value } = e.target;
+    const numericValue = parseFloat(value);
+    
+    // Prevent negative values for soil nutrients and rainfall
+    setFormData({ ...formData, [name]: numericValue < 0 ? 0 : numericValue });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,45 +39,71 @@ const CropRecommendation = () => {
     setError(null);
     setImageSrc(null);
 
-    const result = await predictCrop(formData);
-    if (result.predicted_crop) {
-      setPrediction(result.predicted_crop);
-      setImageSrc(cropImages[result.predicted_crop.toLowerCase()] || null);
-    } else {
-      setError(result.error || "Unexpected error occurred.");
+    try {
+      const result = await predictCrop(formData);
+      console.log("API Response:", result); // Debugging log
+
+      if (result.predicted_crop) {
+        const cropKey = result.predicted_crop.toLowerCase().replace(/\s+/g, ""); // Normalize key
+        setPrediction(result.predicted_crop);
+        setImageSrc(cropImages[cropKey] || null);
+      } else {
+        setError(result.error || "Unexpected error occurred.");
+      }
+    } catch (err) {
+      setError("Failed to fetch prediction. Please try again.");
+      console.error("Error predicting crop:", err);
     }
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4">Crop Prediction</h2>
+    <div className="max-w-lg mx-auto mt-20 p-6 bg-white rounded-lg shadow-lg">
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        Crop Prediction
+      </h2>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         {Object.keys(formData).map((key) => (
           <div key={key}>
-            <label className="block font-semibold capitalize">{key}</label>
+            <label className="block font-semibold capitalize text-gray-700">
+              {key}
+            </label>
             <input
               type="number"
               name={key}
               value={formData[key as keyof typeof formData]}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              step={key === "ph" ? "0.01" : "1"} // Allows decimal for pH only
               required
             />
           </div>
         ))}
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700">
+
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition duration-300"
+        >
           Predict Crop
         </button>
       </form>
 
       {prediction && (
-        <div className="mt-4">
-          <p className="text-green-600 font-bold">Recommended Crop: {prediction}</p>
-          {imageSrc && <img src={imageSrc} alt={prediction} className="w-48 h-48 object-cover mt-2" />}
+        <div className="mt-6 text-center">
+          <p className="text-green-600 font-bold text-lg">
+            Recommended Crop: {prediction}
+          </p>
+          {imageSrc && (
+            <img
+              src={imageSrc}
+              alt={prediction}
+              className="w-48 h-48 object-cover mt-4 mx-auto rounded-lg shadow-lg"
+            />
+          )}
         </div>
       )}
 
-      {error && <p className="mt-4 text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-red-600 text-center">{error}</p>}
     </div>
   );
 };

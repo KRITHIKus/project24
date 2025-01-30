@@ -1,4 +1,4 @@
-State,District,Market,Commodity,Variety,Grade,Arrival_Date,Min Price,Max Price,Modal Price
+State,District,Market,Commodity,Variety,Grade,Date,MinPrice,MaxPrice,ModalPrice
 Gujarat,Amreli,Damnagar,Bhindi(Ladies Finger),Bhindi,FAQ,27-07-2023,4100,4500,4350
 Gujarat,Amreli,Damnagar,Brinjal,Other,FAQ,27-07-2023,2200,3000,2450
 Gujarat,Amreli,Damnagar,Cabbage,Cabbage,FAQ,27-07-2023,2350,3000,2700

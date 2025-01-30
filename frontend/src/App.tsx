@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import CropRecommendation from "./pages/CropRecommendation";
-// import MarketTrends from "./pages/MarketTrends";
+import MarketPrice from "./pages/marketPrice";
 // import NotFound from "./pages/NotFound";
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/predict" element={<CropRecommendation />} />
-                        {/* <Route path="/market-trends" element={<MarketTrends />} /> */}
+                        <Route path="/market-price" element={<MarketPrice />} />
                         {/* <Route path="*" element={<NotFound />} /> */}
                     </Routes>
                 </main>
