@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)  # <-- Configured logging to capture inf
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://farmer-ai-x2hw.onrender.com"])
 
 # Load model path from environment variable (defaults to 'models/crop_model.pkl')
 model_path = os.getenv('model_path', 'models/crop_model.pkl')  # <-- Path to model file
