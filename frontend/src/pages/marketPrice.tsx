@@ -9,10 +9,11 @@ import {
   LinearScale,
   Tooltip,
   Legend,
+  Title,
 } from "chart.js";
 
-// Register Chart.js components
-ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend);
+
+ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend, Title);
 
 const MarketPriceComponent = () => {
   const [state, setState] = useState("");
@@ -22,6 +23,7 @@ const MarketPriceComponent = () => {
   const [priceTrends, setPriceTrends] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [warning, setWarning] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,33 +31,54 @@ const MarketPriceComponent = () => {
     setPriceTrends(null);
     setError(null);
     setWarning(null);
+    setLoading(true); 
 
-    const formattedCropName = cropName.toUpperCase();
+    const formattedState = state.trim();
+    const formattedDistrict = district.trim();
+    const formattedCropName = cropName.trim().toUpperCase();
+
     if (cropName !== formattedCropName) {
       setWarning("Please enter the crop name in ALL CAPITAL LETTERS.");
     }
 
-    const data = { state, district, crop_name: formattedCropName };
+    const data = { state: formattedState, district: formattedDistrict, crop_name: formattedCropName };
 
     try {
       const result = await getMarketPrice(data);
-
       if (result.crop_prices) {
         setPriceData(result.crop_prices);
       } else {
         setError(result.error || "Unexpected error occurred.");
       }
-
       if (result.price_trends) {
         setPriceTrends(result.price_trends);
       }
     } catch (err) {
       console.error("Error fetching market prices:", err);
       setError("Failed to fetch market prices");
+    } finally {
+      setLoading(false); 
     }
   };
 
-  // Prepare data for Chart.js
+ 
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: "top" as const },
+      title: {
+        display: true,
+        text: "Crop Price Trends Over Time",
+        font: { size: 16 },
+      },
+    },
+    scales: {
+      x: { grid: { display: false }, title: { display: true, text: "Date" } },
+      y: { grid: { color: "#e0e0e0" }, title: { display: true, text: "Price (₹)" } },
+    },
+  };
+
   const chartData = {
     labels: priceTrends?.map((entry: any) => entry.Date) || [],
     datasets: [
@@ -128,13 +151,21 @@ const MarketPriceComponent = () => {
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all duration-200 font-semibold"
+          disabled={loading}
         >
-          Get Market Price
+          {loading ? "Loading..." : "Get Market Price"}
         </button>
       </form>
 
+      {/* Loading Indicator */}
+      {loading && (
+        <div className="flex justify-center items-center mt-6">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500"></div>
+        </div>
+      )}
+
       {/* Market Prices Display */}
-      {priceData && (
+      {priceData && !loading && (
         <div className="mt-6">
           <h3 className="text-lg font-semibold text-center text-gray-700 mb-3">
             💰 Market Prices
@@ -158,19 +189,19 @@ const MarketPriceComponent = () => {
       )}
 
       {/* Price Trends Chart */}
-      {priceTrends && (
+      {priceTrends && !loading && (
         <div className="mt-8 p-4 bg-gray-100 rounded-lg shadow">
           <h3 className="text-lg font-semibold text-center text-gray-700 mb-3">
             📊 Price Trends Over Time
           </h3>
-          <div className="w-full h-64">
-            <Line data={chartData} />
+          <div className="w-full h-72">
+            <Line data={chartData} options={chartOptions} />
           </div>
         </div>
       )}
 
       {/* Error Message */}
-      {error && (
+      {error && !loading && (
         <p className="mt-6 text-center text-red-600 font-medium bg-red-100 p-3 rounded-lg">
           ❌ {error}
         </p>

@@ -15,6 +15,7 @@ const CropRecommendation = () => {
   const [prediction, setPrediction] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false); // State to manage loading
 
   // Map of crops to their images (normalized keys)
   const cropImages: Record<string, string> = {
@@ -40,7 +41,6 @@ const CropRecommendation = () => {
     apple: "/assets/crop_images/apple.jpg",    
     muskmelon: "/assets/crop_images/muskmelon.jpg",    
     coffee: "/assets/crop_images/coffee.jpg",    
-
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +56,7 @@ const CropRecommendation = () => {
     setPrediction(null);
     setError(null);
     setImageSrc(null);
+    setLoading(true); // Show loading indicator
 
     try {
       const result = await predictCrop(formData);
@@ -71,6 +72,8 @@ const CropRecommendation = () => {
     } catch (err) {
       setError("Failed to fetch prediction. Please try again.");
       console.error("Error predicting crop:", err);
+    } finally {
+      setLoading(false); // Hide loading indicator
     }
   };
 
@@ -80,6 +83,7 @@ const CropRecommendation = () => {
         Crop Prediction
       </h2>
 
+      {/* Form Section */}
       <form onSubmit={handleSubmit} className="space-y-4">
         {Object.keys(formData).map((key) => (
           <div key={key}>
@@ -101,12 +105,21 @@ const CropRecommendation = () => {
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition duration-300"
+          disabled={loading} // Disable button during loading
         >
-          Predict Crop
+          {loading ? "Predicting..." : "Predict Crop"}
         </button>
       </form>
 
-      {prediction && (
+      {/* Loading Indicator */}
+      {loading && (
+        <div className="flex justify-center items-center mt-6">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500"></div>
+        </div>
+      )}
+
+      {/* Prediction Display */}
+      {prediction && !loading && (
         <div className="mt-6 text-center">
           <p className="text-green-600 font-bold text-lg">
             Recommended Crop: {prediction}
@@ -121,6 +134,7 @@ const CropRecommendation = () => {
         </div>
       )}
 
+      {/* Error Message */}
       {error && <p className="mt-4 text-red-600 text-center">{error}</p>}
     </div>
   );

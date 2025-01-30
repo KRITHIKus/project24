@@ -12,14 +12,21 @@ export default function Navbar() {
     <nav className="bg-green-600 text-white p-4 fixed top-0 w-full shadow-lg z-50">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <h1 className="text-xl font-bold">
-          <NavLink to="/" className="hover:text-yellow-300 transition" onClick={closeMenu}>
+        <h1 className="text-xl font-bold text-center flex-grow">
+          <NavLink
+            to="/"
+            className="hover:text-yellow-300 transition"
+            onClick={closeMenu}
+          >
             Farming AI
           </NavLink>
         </h1>
 
         {/* Mobile Menu Button */}
-        <button onClick={toggleMenu} className="lg:hidden z-50">
+        <button
+          onClick={toggleMenu}
+          className="lg:hidden z-50 flex items-center justify-center"
+        >
           {isMenuOpen ? <FaTimes size={26} /> : <FaBars size={26} />}
         </button>
 
@@ -73,6 +80,17 @@ export default function Navbar() {
             >
               Weather Forecast
             </a>
+          </li>
+          <li className="text-lg py-2">
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `hover:text-yellow-300 transition ${isActive ? "text-yellow-300 font-bold" : ""}`
+              }
+              onClick={closeMenu}
+            >
+              About
+            </NavLink>
           </li>
         </ul>
       </div>

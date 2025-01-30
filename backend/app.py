@@ -9,7 +9,7 @@ from routes.market_prices import market_prices_bp
 
 logging.basicConfig(level=logging.INFO)  
 
-frontend_url = os.getenv('FRONT_END_URL', 'http://localhost:3000') 
+frontend_url = os.getenv('FRONT_END_URL', 'http://localhost:5173') 
 
 
 app = Flask(__name__)
