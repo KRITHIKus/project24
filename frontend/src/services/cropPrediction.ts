@@ -11,7 +11,7 @@ interface CropData {
 }
 
 // Set backend URL directly here
-const API_BASE_URL = import.meta.env.REACT_APP_API_URL || "http://127.0.0.1:5000"; // Backend API URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:5000"; // Backend API URL
 
 export const predictCrop = async (data: CropData) => {
   try {
