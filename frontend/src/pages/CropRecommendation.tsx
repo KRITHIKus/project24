@@ -223,7 +223,7 @@ const CropRecommendation = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Crop Recommendation
+          Crop Recommendation 
         </motion.h2>
 
         {/* Form */}

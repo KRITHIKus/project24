@@ -47,7 +47,7 @@ export default function About() {
         <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 text-center mb-6">🔹 How It Works</h2>
         <ul className="text-lg text-gray-700 space-y-4 bg-white p-6 rounded-lg shadow-lg">
           <li>✅ Farmers input **location, and climate conditions**.</li>
-          <li>✅ AI analyzes **soil nutrients, weather forecasts, and historical data**.</li>
+          <li>✅ Model analyzes **soil nutrients, weather forecasts, and historical data**.</li>
           <li>✅ The system recommends the **best crops** for maximum yield.</li>
           <li>✅ Farmers can also check **weather updates and market prices**.</li>
           <li>✅ Helps **maximize profits and reduce risks** in farming.</li>

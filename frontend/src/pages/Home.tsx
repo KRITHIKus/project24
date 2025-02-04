@@ -138,7 +138,8 @@ export default function Home() {
                     {[
                         { title: "Smart Irrigation", desc: "Modern irrigation systems use sensors and data analytics to reduce water consumption and improve crop yield." },
                         { title: "AI Crop Disease Detection", desc: "AI-based systems can detect diseases early, allowing farmers to take action and prevent crop losses." },
-                        { title: "Precision Farming", desc: "By using drones and sensors, farmers can monitor soil health, optimize resource use, and increase efficiency." }
+                        { title: "Precision Farming", desc: "By using drones and sensors, farmers can monitor soil health, optimize resource use, and increase efficiency." },
+                        { title: "Agri-Tech", desc: "Agriculture technology or Agri technology is also known as agritech. It is efficient in mapping, monitoring, and managing farming decisions precisely. Agriculture solutions come in various formats such as satellite imagery, sensors, agriculture machines, and software solutions." }
                     ].map((item, index) => (
                         <div key={index} className="flex justify-center items-center p-6 bg-white/40 backdrop-blur-xl shadow-lg rounded-xl text-center">
                             <div>
