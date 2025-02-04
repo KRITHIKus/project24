@@ -12,21 +12,21 @@ export default function About() {
 
       {/* Key Features */}
       <div className="mt-12 md:mt-16 w-full max-w-6xl">
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-6">🌟 Key Features</h2>
+        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-6"> Key Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
-              title: "🌱 Crop Recommendation",
+              title: " Crop Recommendation",
               desc: "AI suggests the best crops based on soil, weather, and regional data.",
               color: "bg-green-100 text-green-700",
             },
             {
-              title: "☀️ Weather Forecasts",
+              title: " Weather Forecasts",
               desc: "Provides 7-day forecasts using OpenWeatherMap API for farming decisions.",
               color: "bg-blue-100 text-blue-700",
             },
             {
-              title: "📉 Market Price Trends",
+              title: " Market Price Trends",
               desc: "Historical crop prices from data.gov.in for informed market decisions.",
               color: "bg-yellow-100 text-yellow-700",
             },
@@ -44,7 +44,7 @@ export default function About() {
 
       {/* How It Works */}
       <div className="mt-12 md:mt-16 w-full max-w-5xl text-left">
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 text-center mb-6">🔹 How It Works</h2>
+        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 text-center mb-6"> How It Works</h2>
         <ul className="text-lg text-gray-700 space-y-4 bg-white p-6 rounded-lg shadow-lg">
           <li>✅ Farmers input **location, and climate conditions**.</li>
           <li>✅ Model analyzes **soil nutrients, weather forecasts, and historical data**.</li>
@@ -58,12 +58,12 @@ export default function About() {
 
       {/* Project Contributors */}
       <div className="mt-12 md:mt-16 w-full max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-6">👨‍💻 Project Contributors</h2>
+        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-6"> Project Contributors</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-lg text-gray-700">
           {[
             { name: "Krithik U S",  color: "bg-green-100 text-green-700" },
             { name: "Prashanth R",  color: "bg-blue-100 text-blue-700" },
-            { name: "C Avino Theja", color: "bg-yellow-100 text-yellow-700" },
+            { name: "Avino Theja C", color: "bg-yellow-100 text-yellow-700" },
           ].map((contributor, index) => (
             <div
               key={index}
@@ -81,12 +81,12 @@ export default function About() {
         <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">🔗 GitHub Repository</h2>
         <p className="mt-2 text-gray-600">Check out our code on GitHub:</p>
         <a
-          href="https://github.com/YOUR_GITHUB_LINK"
+          href="https://github.com/KRITHIKus/project24.git"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
         >
-          View on GitHub 🚀
+          View on GitHub 
         </a>
       </div>
     </div>

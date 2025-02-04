@@ -207,15 +207,15 @@ const CropRecommendation = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex justify-center items-center px-4">
-      {/* Background with blur effect */}
-      <div
-        className="absolute inset-0 bg-cover bg-center blur-md brightness-75"
-        style={{ backgroundImage: "url('/assets/background4.jpeg')" }}
-      ></div>
+      <div className="relative min-h-screen flex justify-center  items-center px-4">
+    {/* Background with improved quality */}
+    <div
+      className="absolute inset-0 bg-cover bg-center blur-sm brightness-90"
+      style={{ backgroundImage: "url('/assets/background6.jpg')" }}
+    ></div>
 
       {/* Modern Glassmorphism Form */}
-      <div className="relative w-full max-w-lg mt-25 mb-20 bg-opacity-20 backdrop-blur-xl p-10 rounded-2xl shadow-2xl border-opacity-30">
+      <div className="relative w-full max-w-lg mt-25 mb-20 bg-opacity-20 backdrop-blur-sm p-10 rounded-2xl shadow-2xl border-opacity-30">
         {/* Title with animation */}
         <motion.h2
           className="text-4xl font-extrabold text-center text-black drop-shadow-lg"
@@ -231,7 +231,7 @@ const CropRecommendation = () => {
           {Object.keys(formData).map((key) => (
             <div key={key} className="relative">
               {/* Updated Label (Always Visible) */}
-              <label className="block text-black font-semibold mb-1">{key.toUpperCase()}</label>
+              <label className="block text-white font-mono mb-1">{key.toUpperCase()}</label>
               <input
                 type="number"
                 name={key}

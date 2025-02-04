@@ -7,7 +7,6 @@ import MarketPrice from "./pages/marketPrice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
 import About from "./pages/About";
 export default function App() {
     return (
