@@ -6,8 +6,9 @@ import CropRecommendation from "./pages/CropRecommendation";
 import MarketPrice from "./pages/marketPrice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import NotFound from "./pages/NotFound";
 
+
+import About from "./pages/About";
 export default function App() {
     return (
         <Router>
@@ -18,6 +19,7 @@ export default function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/predict" element={<CropRecommendation />} />
                         <Route path="/market-price" element={<MarketPrice />} />
+                        <Route path="/about" element={<About />} />
                         {/* <Route path="*" element={<NotFound />} /> */}
                     </Routes>
                 </main>
