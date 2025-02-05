@@ -1,3 +1,7 @@
+
+
+
+
 // import { useState } from "react";
 // import { predictCrop } from "../services/cropPrediction";
 // import { motion } from "framer-motion";
@@ -22,28 +26,44 @@
 //   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 //     const { name, value } = e.target;
 //     setFormData({ ...formData, [name]: value });
-//     setWarnings((prev) => ({ ...prev, [name]: false })); // Remove warning on change
+
+//     // Remove warning when the user starts typing
+//     setWarnings({ ...warnings, [name]: false });
 //   };
 
 //   const handleSubmit = async (e: React.FormEvent) => {
 //     e.preventDefault();
-
-//     // Check for empty fields
-//     const emptyFields = Object.keys(formData).filter((key) => formData[key as keyof typeof formData] === "");
-//     if (emptyFields.length > 0) {
-//       setWarnings(emptyFields.reduce((acc, key) => ({ ...acc, [key]: true }), {}));
-//       return;
-//     }
-
 //     setLoading(true);
 //     setPrediction(null);
 //     setError(null);
 //     setImageSrc(null);
 
+//     // **Validation Check**
+//     let newWarnings: { [key: string]: boolean } = {};
+//     let isValid = true;
+//     Object.keys(formData).forEach((key) => {
+//       if (!formData[key as keyof typeof formData]) {
+//         newWarnings[key] = true;
+//         isValid = false;
+//       }
+//     });
+
+//     if (!isValid) {
+//       setWarnings(newWarnings);
+//       setLoading(false);
+//       return;
+//     }
+
 //     try {
-//       const numericData = Object.fromEntries(
-//         Object.entries(formData).map(([key, value]) => [key, parseFloat(value)])
-//       );
+//       const numericData = {
+//         N: parseFloat(formData.N),
+//         P: parseFloat(formData.P),
+//         K: parseFloat(formData.K),
+//         ph: parseFloat(formData.ph),
+//         temperature: parseFloat(formData.temperature),
+//         humidity: parseFloat(formData.humidity),
+//         rainfall: parseFloat(formData.rainfall),
+//       };
 
 //       const result = await predictCrop(numericData);
 //       if (result.predicted_crop) {
@@ -60,50 +80,49 @@
 //   };
 
 //   return (
-//     <div className="relative min-h-screen flex justify-center items-center px-4">
-//       {/* Background with blur effect */}
-//       <div
-//         className="absolute inset-0 bg-cover bg-center blur-md brightness-75"
-//         style={{ backgroundImage: "url('/assets/background4.jpeg')" }}
-//       ></div>
+//       <div className="relative min-h-screen flex justify-center  items-center px-4">
+//     {/* Background with improved quality */}
+//     <div
+//       className="absolute inset-0 bg-cover bg-center blur-sm brightness-90"
+//       style={{ backgroundImage: "url('/assets/background6.jpg')" }}
+//     ></div>
 
 //       {/* Modern Glassmorphism Form */}
-//       <div className="relative w-full max-w-lg mt-25 mb-20 bg-opacity-20 backdrop-blur-xl p-10 rounded-2xl shadow-2xl border-opacity-30">
+//       <div className="relative w-full max-w-lg mt-25 mb-20 bg-opacity-20 backdrop-blur-sm p-10 rounded-2xl shadow-2xl border-opacity-30">
 //         {/* Title with animation */}
 //         <motion.h2
-//           className="text-4xl   font-extrabold text-center text-black drop-shadow-lg"
+//           className="text-4xl font-extrabold text-center text-black drop-shadow-lg"
 //           initial={{ opacity: 0, y: -10 }}
 //           animate={{ opacity: 1, y: 0 }}
 //           transition={{ duration: 1 }}
 //         >
-//           Crop Recommendation
+//           Crop Recommendation 
 //         </motion.h2>
 
 //         {/* Form */}
 //         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
 //           {Object.keys(formData).map((key) => (
 //             <div key={key} className="relative">
-//               <label className="absolute -top-3 mt-1 left-4 bg-opacity-20 px-2 text-sm font-medium text-black backdrop-blur-md rounded-md">
-//                 {key.toUpperCase()}
-//               </label>
+//               {/* Updated Label (Always Visible) */}
+//               <label className="block text-white font-mono mb-1">{key.toUpperCase()}</label>
 //               <input
 //                 type="number"
 //                 name={key}
 //                 value={formData[key as keyof typeof formData]}
 //                 onChange={handleChange}
-//                 step="any"
-//                 className={`w-full mt-5 p-2 text-lg border-none rounded-lg bg-white bg-opacity-30 text-black placeholder-gray-200 shadow-md focus:ring-2 focus:ring-blue-500 focus:outline-none backdrop-blur-md ${
-//                   warnings[key] ? "border-2 border-red-500" : ""
+//                 className={`w-full p-3 h-12 text-lg border border-gray-300 rounded-lg bg-white bg-opacity-40 text-black placeholder-gray-400 shadow-md focus:ring-2 focus:ring-blue-500 focus:outline-none backdrop-blur-md ${
+//                   warnings[key] ? "border-red-500 border-2" : ""
 //                 }`}
+//                 step="0.01"
 //                 required
 //               />
-//               {warnings[key] && <p className="text-red-500 text-sm mt-1">This field is required</p>}
+//               {warnings[key] && <p className="text-red-500 text-sm mt-1">This field is required.</p>}
 //             </div>
 //           ))}
 
 //           <button
 //             type="submit"
-//             className="w-full bg-gradient-to-r from-blue-900 to-green-500 text-white py-3 text-lg rounded-lg font-semibold hover:scale-105 transition duration-300 shadow-lg"
+//             className="w-full bg-gradient-to-r from-green-400 to-blue-500 text-white py-3 text-lg rounded-lg font-semibold hover:scale-105 transition duration-300 shadow-lg"
 //             disabled={loading}
 //           >
 //             {loading ? "Predicting..." : "Predict Crop"}
@@ -126,7 +145,6 @@
 // };
 
 // export default CropRecommendation;
-
 
 
 import { useState } from "react";
@@ -153,8 +171,6 @@ const CropRecommendation = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-
-    // Remove warning when the user starts typing
     setWarnings({ ...warnings, [name]: false });
   };
 
@@ -165,7 +181,6 @@ const CropRecommendation = () => {
     setError(null);
     setImageSrc(null);
 
-    // **Validation Check**
     let newWarnings: { [key: string]: boolean } = {};
     let isValid = true;
     Object.keys(formData).forEach((key) => {
@@ -207,30 +222,25 @@ const CropRecommendation = () => {
   };
 
   return (
-      <div className="relative min-h-screen flex justify-center  items-center px-4">
-    {/* Background with improved quality */}
-    <div
-      className="absolute inset-0 bg-cover bg-center blur-sm brightness-90"
-      style={{ backgroundImage: "url('/assets/background6.jpg')" }}
-    ></div>
+    <div className="relative min-h-screen flex justify-center items-center px-4">
+      <div
+        className="absolute inset-0 bg-cover bg-center blur-sm brightness-90"
+        style={{ backgroundImage: "url('/assets/background6.jpg')" }}
+      ></div>
 
-      {/* Modern Glassmorphism Form */}
       <div className="relative w-full max-w-lg mt-25 mb-20 bg-opacity-20 backdrop-blur-sm p-10 rounded-2xl shadow-2xl border-opacity-30">
-        {/* Title with animation */}
         <motion.h2
           className="text-4xl font-extrabold text-center text-black drop-shadow-lg"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Crop Recommendation 
+          Crop Recommendation
         </motion.h2>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
           {Object.keys(formData).map((key) => (
             <div key={key} className="relative">
-              {/* Updated Label (Always Visible) */}
               <label className="block text-white font-mono mb-1">{key.toUpperCase()}</label>
               <input
                 type="number"
@@ -256,7 +266,13 @@ const CropRecommendation = () => {
           </button>
         </form>
 
-        {/* Prediction result */}
+        {/* Loading Indicator */}
+        {loading && (
+          <div className="flex justify-center items-center mt-6">
+            <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500"></div>
+          </div>
+        )}
+
         {prediction && !loading && (
           <div className="mt-6 text-center">
             <p className="text-green-300 font-bold text-xl">Recommended Crop: {prediction}</p>
@@ -264,7 +280,6 @@ const CropRecommendation = () => {
           </div>
         )}
 
-        {/* Error message */}
         {error && <p className="mt-4 text-red-400 text-center">{error}</p>}
       </div>
     </div>
