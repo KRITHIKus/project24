@@ -18,7 +18,7 @@ const validateCropData = (data: CropData): string | null => {
   if (
     data.N < 0 || data.P < 0 || data.K < 0 || 
     data.ph <= 0 || data.ph > 14 ||
-    data.temperature < -50 || data.temperature > 60 ||
+    data.temperature < -10 || data.temperature > 60 ||
     data.humidity < 0 || data.humidity > 100 ||
     data.rainfall < 0
   ) {
