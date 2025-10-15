@@ -90,7 +90,7 @@ export default function Home() {
     };
 
     return (
-        <div className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center px-6 py-12 mt-10"
+        <div className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center px-6 py-12 "
             style={{ backgroundImage: "url('/assets/background1.jpeg')" }}>
             
             <div className="absolute inset-0  bg-opacity-50 backdrop-blur-sm"></div>
@@ -99,7 +99,7 @@ export default function Home() {
 
             {/* Hero Section */}
             <motion.div
-                className="relative z-10 flex flex-col items-center text-center bg-white/30 backdrop-blur-lg p-10 rounded-2xl shadow-xl w-full max-w-3xl"
+                className="relative z-10 flex flex-col items-center text-center bg-white/30 backdrop-blur-lg p-10 rounded-2xl shadow-xl w-full max-w-3xl mt-5"
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
