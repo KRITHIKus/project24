@@ -99,7 +99,7 @@ export default function Home() {
 
             {/* Hero Section */}
             <motion.div
-                className="relative z-10 flex flex-col items-center text-center bg-white/30 backdrop-blur-lg p-10 rounded-2xl shadow-xl w-full max-w-3xl mt-5"
+                className="relative z-10 flex flex-col items-center text-center bg-white/30 backdrop-blur-lg p-10 rounded-2xl shadow-xl w-full max-w-3xl mt-16"
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
