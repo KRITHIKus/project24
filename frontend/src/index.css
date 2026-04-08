@@ -1,1 +1,229 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-soil:        #1e1a14;
+  --color-bark:        #3d2f1a;
+  --color-moss:        #3a6b47;
+  --color-leaf:        #4a7c59;
+  --color-sage:        #6a9e77;
+  --color-mist:        #b8d4b5;
+  --color-dew:         #e2ede0;
+  --color-parchment:   #f2ede4;
+  --color-cream:       #f8f5ef;
+  --color-wheat:       #c49a4a;
+  --color-sand:        #e2ceaa;
+  --color-stone:       #5a5248;
+  --color-slate:       #2c2820;
+
+  --bg-page:           var(--color-cream);
+  --bg-surface:        #ffffff;
+  --bg-subtle:         var(--color-dew);
+  --border-default:    #d4cec4;
+  --border-strong:     #b8b0a4;
+  --text-primary:      #1e1a14;
+  --text-secondary:    #3d3730;
+  --text-muted:        #6b6258;
+  --accent-primary:    var(--color-moss);
+  --accent-hover:      #2e5538;
+  --accent-light:      var(--color-mist);
+
+  --font-display:      'Playfair Display', Georgia, serif;
+  --font-body:         'DM Sans', system-ui, sans-serif;
+
+  --nav-height:        64px;
+  --radius-sm:         6px;
+  --radius-md:         12px;
+  --radius-lg:         18px;
+  --shadow-card:       0 1px 4px rgba(30,26,20,0.08), 0 6px 20px rgba(30,26,20,0.08);
+  --shadow-nav:        0 1px 0 rgba(30,26,20,0.1), 0 4px 16px rgba(30,26,20,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-primary);
+  background: var(--bg-page);
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 26px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-primary);
+  color: #fff;
+  font-family: var(--font-body); font-size: 15px; font-weight: 600;
+  letter-spacing: 0.01em; border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  text-decoration: none; white-space: nowrap;
+}
+.btn-primary:hover {
+  background: var(--accent-hover); transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(58,107,71,0.3);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 24px;
+  border-radius: var(--radius-sm);
+  background: transparent; color: var(--text-primary);
+  font-family: var(--font-body); font-size: 15px; font-weight: 500;
+  border: 1.5px solid var(--border-strong); cursor: pointer;
+  transition: all 0.2s; text-decoration: none;
+}
+.btn-outline:hover {
+  background: var(--text-primary); color: #fff; border-color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+/* ── Card ── */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.card:hover {
+  box-shadow: 0 4px 8px rgba(30,26,20,0.1), 0 16px 40px rgba(30,26,20,0.12);
+  transform: translateY(-4px);
+}
+
+/* ── Typography helpers ── */
+.section-label {
+  font-family: var(--font-body); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-primary);
+}
+.display-heading {
+  font-family: var(--font-display); color: var(--color-soil); line-height: 1.15;
+}
+
+/* ── Inputs ── */
+.field-label {
+  display: block; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.05em; color: var(--text-secondary);
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.field-input {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  font-family: var(--font-body); font-size: 15px; color: var(--text-primary);
+  transition: border-color 0.15s, box-shadow 0.15s; outline: none;
+}
+.field-input::placeholder { color: var(--text-muted); }
+.field-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(58,107,71,0.14);
+}
+.field-input.error { border-color: #b33; }
+
+/* ── Spinner ── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  width: 20px; height: 20px;
+  border: 2.5px solid var(--color-mist); border-top-color: var(--accent-primary);
+  border-radius: 50%; animation: spin 0.7s linear infinite;
+}
+
+/* ── Page wrapper ── */
+.page-wrapper { min-height: 100vh; padding-top: var(--nav-height); background: var(--bg-page); }
+
+/* ══════════════════════════════════════════
+   HERO ANIMATIONS
+══════════════════════════════════════════ */
+
+/* Particle float */
+@keyframes particleFloat {
+  0%   { transform: translateY(100vh) translateX(0px) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(-120px) translateX(40px) rotate(360deg); opacity: 0; }
+}
+
+/* Gentle sway for leaves */
+@keyframes leafSway {
+  0%, 100% { transform: rotate(-8deg) translateY(0px); }
+  33%       { transform: rotate(4deg) translateY(-12px); }
+  66%       { transform: rotate(-4deg) translateY(-6px); }
+}
+@keyframes leafSway2 {
+  0%, 100% { transform: rotate(6deg) translateY(0px); }
+  50%       { transform: rotate(-6deg) translateY(-16px); }
+}
+
+/* SVG draw-on */
+@keyframes drawPath {
+  from { stroke-dashoffset: 1000; opacity: 0; }
+  to   { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* Pulsing root line */
+@keyframes rootGrow {
+  from { transform: scaleY(0); transform-origin: top; opacity: 0; }
+  to   { transform: scaleY(1); transform-origin: top; opacity: 0.25; }
+}
+
+/* Circuit / data pulse */
+@keyframes dataPulse {
+  0%, 100% { opacity: 0.2; }
+  50%       { opacity: 0.8; }
+}
+
+/* Node ping */
+@keyframes nodePing {
+  0%   { transform: scale(1); opacity: 0.8; }
+  70%  { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* Hero text reveal */
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Counter count-up shimmer */
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+/* Scroll indicator bounce */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* Stat number reveal */
+@keyframes statReveal {
+  from { opacity: 0; transform: translateY(16px) scale(0.85); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Card stagger */
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Tab underline slide */
+@keyframes tabUnderline {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-page); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }

@@ -4,26 +4,27 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import CropRecommendation from "./pages/CropRecommendation";
 import MarketPrice from "./pages/marketPrice";
+import About from "./pages/About";
+import AgriRevolution from "./pages/Agrirevolution";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import About from "./pages/About";
 export default function App() {
-    return (
-        <Router>
-            <div className="flex flex-col min-h-screen">
-                <Navbar />
-                <main className="flex-grow">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/predict" element={<CropRecommendation />} />
-                        <Route path="/market-price" element={<MarketPrice />} />
-                        <Route path="/about" element={<About />} />
-                        {/* <Route path="*" element={<NotFound />} /> */}
-                    </Routes>
-                </main>
-                <Footer />
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/"                element={<Home />} />
+            <Route path="/predict"         element={<CropRecommendation />} />
+            <Route path="/market-price"    element={<MarketPrice />} />
+            <Route path="/about"           element={<About />} />
+            <Route path="/agri-revolution" element={<AgriRevolution />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
