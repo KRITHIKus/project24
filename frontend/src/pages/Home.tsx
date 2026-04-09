@@ -93,7 +93,7 @@ function HeroCanvas() {
 
     // ── AI network nodes ──
     interface Node { x: number; y: number; r: number; pulse: number; speed: number; connections: number[]; }
-    const nodes: Node[] = Array.from({ length: 9 }, (_, i) => ({
+    const nodes: Node[] = Array.from({ length: 9 }, () => ({
       x: (W() * 0.55) + (Math.random() - 0.5) * W() * 0.4,
       y: (H() * 0.3) + (Math.random() - 0.5) * H() * 0.5,
       r: Math.random() * 3 + 2,
@@ -127,7 +127,7 @@ function HeroCanvas() {
       frame++;
 
       // ── Draw roots ──
-      roots.forEach((r, depth) => {
+      roots.forEach((r,) => {
         growBranch(r, 0);
         drawBranch(r);
         r.children.forEach(c => { growBranch(c, 1); drawBranch(c); c.children.forEach(cc => { growBranch(cc, 2); drawBranch(cc); }); });
