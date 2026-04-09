@@ -535,7 +535,7 @@ export default function AgriRevolution() {
             </div>
             <div style={{ flexShrink: 0 }}>
               <a
-                href=""   /* ← blog post URL goes here */
+                href="https://a2d-blog.onrender.com/dashboard/post/ai-in-agriculture-from-data-to-decisions"   
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"
